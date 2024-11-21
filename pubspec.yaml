@@ -1,0 +1,28 @@
+name: talentaku
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.5.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  get: ^4.6.5
+  crystal_navigation_bar: ^1.0.0
+  iconly: ^1.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - images/logo.png
+    - images/boy1.png
+    - images/boy2.png
+    - images/abc.png
+    - images/terapiwicara.png
