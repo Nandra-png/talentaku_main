@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:talentaku/models/laporan_preview_event.dart';
+import 'package:talentaku/constants/app_colors.dart';
+import 'package:talentaku/constants/app_text_styles.dart';
+import 'package:talentaku/constants/app_sizes.dart';
+import 'package:talentaku/constants/app_decorations.dart';
 
 class LaporanPreviewCard extends StatelessWidget {
   final LaporanPreviewEvent laporan;
@@ -17,82 +21,60 @@ class LaporanPreviewCard extends StatelessWidget {
         Get.snackbar(
           'Sukses',
           'Laporan berhasil dibuka',
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
+          backgroundColor: AppColors.success,
+          colorText: AppColors.textLight,
           snackPosition: SnackPosition.BOTTOM,
-          margin: const EdgeInsets.all(20),
+          margin: const EdgeInsets.all(AppSizes.paddingXL),
         );
       },
       child: Container(
-        width: 280,
-        margin: const EdgeInsets.only(right: 15),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              spreadRadius: 1,
-              blurRadius: 10,
-              offset: const Offset(0, 1),
-            ),
-          ],
-        ),
+        width: AppSizes.cardWidth,
+        margin: const EdgeInsets.only(right: AppSizes.paddingL),
+        decoration: AppDecorations.cardDecoration,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(AppSizes.paddingL),
               decoration: BoxDecoration(
-                color: const Color(0xFFE6EAFF),
-                borderRadius: BorderRadius.circular(20),
+                color: AppColors.primaryLight,
+                borderRadius: BorderRadius.circular(AppSizes.radiusXL),
               ),
               child: Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF6E85E8).withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Icon(
+                    padding: const EdgeInsets.all(AppSizes.paddingM),
+                    decoration: AppDecorations.iconContainerDecoration,
+                    child: Icon(
                       Icons.description_outlined,
-                      color: Color(0xFF6E85E8),
-                      size: 24,
+                      color: AppColors.primary,
+                      size: AppSizes.iconL,
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  const SizedBox(width: AppSizes.paddingM),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           laporan.title,
-                          style: const TextStyle(
-                            color: Color(0xFF353535),
-                            fontSize: 16,
-                            fontFamily: 'Manrope',
-                            fontWeight: FontWeight.w700,
-                          ),
+                          style: AppTextStyles.bodyLarge,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        const SizedBox(height: 4),
+                        const SizedBox(height: AppSizes.paddingXS),
                         Row(
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.calendar_today_sharp,
-                              color: Color(0xFF43508C),
-                              size: 12,
+                              color: AppColors.textSecondary,
+                              size: AppSizes.iconS,
                             ),
-                            const SizedBox(width: 4),
+                            const SizedBox(width: AppSizes.paddingXS),
                             Text(
                               laporan.date,
-                              style: const TextStyle(
-                                color: Color(0xFF43508C),
-                                fontSize: 12,
-                                fontFamily: 'Manrope',
-                                fontWeight: FontWeight.w500,
+                              style: AppTextStyles.bodySmall.copyWith(
+                                color: AppColors.textSecondary,
                               ),
                             ),
                           ],
@@ -104,15 +86,10 @@ class LaporanPreviewCard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(AppSizes.paddingL),
               child: Text(
                 laporan.description,
-                style: TextStyle(
-                  color: Colors.black.withOpacity(0.7),
-                  fontSize: 12,
-                  fontFamily: 'Manrope',
-                  height: 1.5,
-                ),
+                style: AppTextStyles.caption,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),

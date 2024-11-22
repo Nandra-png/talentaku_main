@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:talentaku/models/class_event.dart';
+import 'package:talentaku/constants/app_colors.dart';
+import 'package:talentaku/constants/app_text_styles.dart';
+import 'package:talentaku/constants/app_sizes.dart';
+import 'package:talentaku/constants/app_decorations.dart';
 
 class ClassCard extends StatelessWidget {
   final ClassEvent classEvent;
@@ -13,54 +17,39 @@ class ClassCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 126,
-      margin: const EdgeInsets.symmetric(horizontal: 20),
+      height: AppSizes.classCardHeight,
+      margin: EdgeInsets.symmetric(horizontal: AppSizes.paddingXL),
       child: Stack(
         children: [
           Container(
             width: double.infinity,
-            height: 126,
-            decoration: BoxDecoration(
-              color: Color(0xFFD5DDFF),
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: [
-                BoxShadow(
-                  color: Color(0x14000000),
-                  blurRadius: 10,
-                  offset: Offset(0, 1),
-                  spreadRadius: 0,
-                ),
-              ],
-            ),
+            height: AppSizes.classCardHeight,
+            decoration: AppDecorations.classCardDecoration,
           ),
-          // Nama Kelompok
           Padding(
-            padding: const EdgeInsets.only(left: 25, top: 22),
+            padding: EdgeInsets.only(left: AppSizes.paddingXL, top: AppSizes.paddingXL),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   classEvent.groupName,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontFamily: 'Manrope',
+                  style: AppTextStyles.bodyLarge.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                SizedBox(height: 4),
+                SizedBox(height: AppSizes.paddingXS),
                 Row(
                   children: [
-                    Icon(Icons.calendar_today_sharp,
-                        size: 12, color: Color(0xFF43508C)),
-                    SizedBox(width: 2),
+                    Icon(
+                      Icons.calendar_today_sharp,
+                      size: AppSizes.iconS,
+                      color: AppColors.primaryDark,
+                    ),
+                    SizedBox(width: AppSizes.paddingXS),
                     Text(
                       classEvent.ageRange,
-                      style: TextStyle(
-                        color: Color(0xFF43508C),
-                        fontSize: 12,
-                        fontFamily: 'Manrope',
-                        fontWeight: FontWeight.w500,
+                      style: AppTextStyles.bodySmall.copyWith(
+                        color: AppColors.primaryDark,
                       ),
                     ),
                   ],
@@ -69,32 +58,39 @@ class ClassCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 24, top: 72),
+            padding: EdgeInsets.only(
+              left: AppSizes.paddingXL,
+              top: AppSizes.paddingXL * 3.6,
+            ),
             child: Row(
-              children: List.generate(4, (index) {
-                return Container(
-                  width: 30,
-                  height: 30,
+              children: List.generate(
+                4,
+                (index) => Container(
+                  width: AppSizes.avatarIconSize,
+                  height: AppSizes.avatarIconSize,
+                  margin: EdgeInsets.only(left: AppSizes.paddingXS),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.grey,
                   ),
-                  child: Icon(Icons.person, size: 20, color: Colors.white),
-                  margin: EdgeInsets.only(left: 2),
-                );
-              }),
+                  child: Icon(
+                    Icons.person,
+                    size: AppSizes.iconM,
+                    color: AppColors.cardBackground,
+                  ),
+                ),
+              ),
             ),
           ),
           Positioned(
-            right: 18,
-            top: 15,
+            right: AppSizes.paddingL,
+            top: AppSizes.paddingL,
             child: Container(
-              width: 104,
-              height: 104,
+              width: AppSizes.classImageSize,
+              height: AppSizes.classImageSize,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image:
-                      AssetImage(classEvent.image), // Ganti dengan path gambar
+                  image: AssetImage(classEvent.image),
                   fit: BoxFit.fill,
                 ),
               ),

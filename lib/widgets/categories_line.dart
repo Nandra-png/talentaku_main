@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:talentaku/models/categories_event.dart';
+import 'package:talentaku/constants/app_colors.dart';
+import 'package:talentaku/constants/app_text_styles.dart';
+import 'package:talentaku/constants/app_sizes.dart';
+import 'package:talentaku/constants/app_decorations.dart';
 
 class CategoriesLine extends StatelessWidget {
   final CategoryEvent categoryEvent;
@@ -12,49 +16,40 @@ class CategoriesLine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity, 
-      height: 64,
-      margin: const EdgeInsets.symmetric(horizontal: 20), 
+      width: double.infinity,
+      height: AppSizes.categoryLineHeight,
+      margin: EdgeInsets.symmetric(horizontal: AppSizes.paddingXL),
       child: Stack(
         clipBehavior: Clip.none,
         children: [
           Container(
             width: double.infinity,
-            height: 42,
-            decoration: BoxDecoration(
-              color: const Color(0xFF6E85E8),
-              borderRadius: BorderRadius.circular(10),
-            ),
+            height: AppSizes.categoryLineHeight * 0.65,
+            decoration: AppDecorations.categoryLineDecoration,
             child: Align(
-              alignment: Alignment.centerLeft, 
+              alignment: Alignment.centerLeft,
               child: Padding(
-                padding: const EdgeInsets.only(
-                    left: 110.0), 
+                padding: EdgeInsets.only(left: AppSizes.categoryImageSize + AppSizes.paddingXL),
                 child: Text(
                   categoryEvent.title,
-                  style: const TextStyle(
-                    color: Color(0xFFFEFEFE),
-                    fontSize: 16,
-                    fontFamily: 'Manrope',
+                  style: AppTextStyles.bodyLarge.copyWith(
+                    color: AppColors.textLight,
                     fontWeight: FontWeight.w700,
-                    height: 1.0,
                   ),
                 ),
               ),
             ),
           ),
           Positioned(
-            top: -32,
-            left: 20,
+            top: -AppSizes.categoryLineHeight * 0.5,
+            left: AppSizes.paddingXL,
             child: Container(
-              width: 80,
-              height: 80,
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Image.asset(
-                  categoryEvent.image,
-                  fit: BoxFit.cover,
-                ),
+              width: AppSizes.categoryImageSize,
+              height: AppSizes.categoryImageSize,
+              padding: EdgeInsets.all(AppSizes.paddingXS),
+              child: Image.asset(
+                categoryEvent.image,
+                fit: BoxFit.cover,
               ),
             ),
           ),

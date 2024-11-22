@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:talentaku/models/broadcast_event.dart';
+import 'package:talentaku/constants/app_colors.dart';
+import 'package:talentaku/constants/app_text_styles.dart';
+import 'package:talentaku/constants/app_sizes.dart';
+import 'package:talentaku/constants/app_decorations.dart';
 
 class BroadcastCard extends StatelessWidget {
   final Event event;
@@ -13,24 +17,17 @@ class BroadcastCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 140,
-      margin: EdgeInsets.symmetric(vertical: 15),
+      height: AppSizes.broadcastHeight,
+      margin: EdgeInsets.symmetric(vertical: AppSizes.paddingL),
       child: Card(
         elevation: 3,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(AppSizes.radiusL),
         ),
         child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [Color(0xFFE6EAFF), Color(0xFFD5DDFF)],
-            ),
-            borderRadius: BorderRadius.circular(16),
-          ),
+          decoration: AppDecorations.broadcastDecoration,
           child: Padding(
-            padding: EdgeInsets.all(16),
+            padding: EdgeInsets.all(AppSizes.paddingL),
             child: Row(
               children: [
                 Expanded(
@@ -40,40 +37,33 @@ class BroadcastCard extends StatelessWidget {
                     children: [
                       Text(
                         event.name,
-                        style: TextStyle(
-                          color: Colors.black87,
-                          fontSize: 18,
-                          fontFamily: 'Manrope',
-                          fontWeight: FontWeight.w700,
-                          height: 1.2,
-                        ),
+                        style: AppTextStyles.heading3,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      SizedBox(height: 8),
+                      SizedBox(height: AppSizes.spaceS),
                       Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: AppSizes.paddingM,
+                          vertical: AppSizes.paddingXS,
+                        ),
                         decoration: BoxDecoration(
-                          color: Color(0xFF43508C).withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(20),
+                          color: AppColors.primaryDark.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(AppSizes.radiusXL),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Icon(
                               Icons.calendar_today_sharp,
-                              color: Color(0xFF43508C),
-                              size: 14,
+                              color: AppColors.primaryDark,
+                              size: AppSizes.iconS,
                             ),
-                            SizedBox(width: 4),
+                            SizedBox(width: AppSizes.paddingXS),
                             Text(
                               event.date,
-                              style: TextStyle(
-                                color: Color(0xFF43508C),
-                                fontSize: 13,
-                                fontFamily: 'Manrope',
-                                fontWeight: FontWeight.w600,
+                              style: AppTextStyles.bodySmall.copyWith(
+                                color: AppColors.primaryDark,
                               ),
                             ),
                           ],
@@ -83,16 +73,16 @@ class BroadcastCard extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: 50,
-                  height: 50,
+                  width: AppSizes.iconL * 2,
+                  height: AppSizes.iconL * 2,
                   decoration: BoxDecoration(
-                    color: Color(0xFF43508C).withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(12),
+                    color: AppColors.primaryDark.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(AppSizes.radiusM),
                   ),
                   child: Icon(
                     Icons.campaign_outlined,
-                    color: Color(0xFF43508C),
-                    size: 28,
+                    color: AppColors.primaryDark,
+                    size: AppSizes.iconL,
                   ),
                 ),
               ],

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:crystal_navigation_bar/crystal_navigation_bar.dart';
 import 'package:iconly/iconly.dart';
 import 'package:get/get.dart';
+import 'package:talentaku/constants/app_colors.dart';
+import 'package:talentaku/constants/app_decorations.dart';
+import 'package:talentaku/constants/app_sizes.dart';
 import '../controllers/navigation_controller.dart';
 
 class BottomNav extends StatelessWidget {
@@ -13,38 +16,35 @@ class BottomNav extends StatelessWidget {
 
     return Obx(
       () => Container(
-        height: 90,
+        height: AppSizes.bottomNavHeight,
         margin: const EdgeInsets.only(bottom: 0),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-        ),
+        decoration: AppDecorations.bottomNavDecoration,
         child: CrystalNavigationBar(
           currentIndex: controller.selectedIndex.value,
-          height: 77,
+          height: AppSizes.bottomNavHeight - 13,
           unselectedItemColor: Colors.grey,
-          backgroundColor: Colors.white,
+          backgroundColor: AppColors.cardBackground,
           onTap: controller.changeIndex,
           items: [
             CrystalNavigationBarItem(
               icon: IconlyBold.home,
               unselectedIcon: IconlyLight.home,
-              selectedColor: const Color(0xFF2563EB),
+              selectedColor: AppColors.primary,
             ),
             CrystalNavigationBarItem(
               icon: IconlyBold.paper,
               unselectedIcon: IconlyLight.paper,
-              selectedColor: const Color(0xFF2563EB),
+              selectedColor: AppColors.primary,
             ),
             CrystalNavigationBarItem(
               icon: IconlyBold.category,
               unselectedIcon: IconlyLight.category,
-              selectedColor: const Color(0xFF2563EB),
+              selectedColor: AppColors.primary,
             ),
             CrystalNavigationBarItem(
               icon: IconlyBold.profile,
               unselectedIcon: IconlyLight.profile,
-              selectedColor: const Color(0xFF2563EB),
+              selectedColor: AppColors.primary,
             ),
           ],
         ),

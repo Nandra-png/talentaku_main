@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:talentaku/constants/app_colors.dart';
+import 'package:talentaku/constants/app_text_styles.dart';
+import 'package:talentaku/constants/app_sizes.dart';
+import 'package:talentaku/constants/app_decorations.dart';
 import '../controllers/home_controller.dart';
 import '../views/notification/notification_screen.dart';
 
@@ -12,68 +16,64 @@ class WelcomeSign extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      height: 70,
-      margin: const EdgeInsets.symmetric(horizontal: 20),
+      height: AppSizes.welcomeSignHeight,
+      margin: EdgeInsets.symmetric(horizontal: AppSizes.paddingXL),
       child: Stack(
         children: [
           Container(
             width: double.infinity,
-            height: 70,
+            height: AppSizes.welcomeSignHeight,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 75, top: 20),
-            child: SizedBox(
-              width: 193,
-              child: Text(
-                'Selamat Datang,',
-                style: TextStyle(
-                  color: Color(0xFF353535),
-                  fontSize: 10,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w400,
-                  height: 0,
-                ),
-              ),
+            padding: EdgeInsets.only(
+              left: AppSizes.logoSize + AppSizes.paddingXL,
+              top: AppSizes.paddingXL,
+            ),
+            child: Text(
+              'Selamat Datang,',
+              style: AppTextStyles.bodySmall,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 75, top: 31),
+            padding: EdgeInsets.only(
+              left: AppSizes.logoSize + AppSizes.paddingXL,
+              top: AppSizes.paddingXL + AppSizes.paddingL,
+            ),
             child: Text(
               controller.userName,
-              style: TextStyle(
-                color: Color(0xFF353535),
-                fontSize: 24,
-                fontFamily: 'Manrope',
-                fontWeight: FontWeight.w700,
-                height: 0,
-              ),
+              style: AppTextStyles.heading1,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 20, top: 15),
+            padding: EdgeInsets.only(
+              left: AppSizes.paddingXL,
+              top: AppSizes.paddingL,
+            ),
             child: Container(
-              width: 40,
-              height: 40,
+              width: AppSizes.logoSize,
+              height: AppSizes.logoSize,
               decoration: BoxDecoration(
-                image: DecorationImage(
+                image: const DecorationImage(
                   image: AssetImage("images/logo.png"),
                   fit: BoxFit.fill,
                 ),
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 320, top: 19),
+          Positioned(
+            right: 0,
+            top: AppSizes.paddingL,
             child: GestureDetector(
               onTap: () => Get.to(() => const NotificationScreen()),
               child: Container(
-                width: 38,
-                height: 38,
-                decoration: BoxDecoration(
-                  color: Color(0xFFF4F4F4),
-                  borderRadius: BorderRadius.circular(15),
+                width: AppSizes.notificationIconSize,
+                height: AppSizes.notificationIconSize,
+                decoration: AppDecorations.notificationButtonDecoration,
+                child: Icon(
+                  Icons.notifications,
+                  size: AppSizes.iconL,
+                  color: AppColors.textPrimary,
                 ),
-                child: const Icon(Icons.notifications),
               ),
             ),
           ),
