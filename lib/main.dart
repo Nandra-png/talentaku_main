@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:talentaku/views/login/login.dart';
+import 'package:talentaku/views/splash_screen/splashscreen.dart';
 import 'controllers/navigation_controller.dart';
 import 'views/home/home_screen.dart';
 import 'views/laporan_siswa/laporan_siswa_screen.dart';
@@ -17,9 +19,15 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      home: const MainScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => Splashscreen(), // Splashscreen route
+        '/login': (context) => const LoginScreen(), // Login screen route
+        '/home': (context) => const HomeScreen(), // Main home screen route
+      },
       initialBinding: BindingsBuilder(() {
-        Get.put(NavigationController());
+        Get.put(
+            NavigationController()); // Initial bindings for NavigationController
       }),
     );
   }
@@ -33,7 +41,7 @@ class MainScreen extends GetView<NavigationController> {
     return Scaffold(
       extendBody: true,
       body: Obx(
-        () => IndexedStack(
+            () => IndexedStack(
           index: controller.selectedIndex.value,
           children: const [
             HomeScreen(),
