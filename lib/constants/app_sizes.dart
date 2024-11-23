@@ -50,4 +50,11 @@ class AppSizes {
   static const double classImageSize = 104.0;
   static const double categoryImageSize = 80.0;
   static const double avatarIconSize = 30.0;
+
+  // Bottom Sheet Sizes
+  static const double bottomSheetHeight = 587.0;
+  static const double bottomSheetImageHeight = 240.0;
+  static const double bottomSheetIndicatorWidth = 44.0;
+  static const double bottomSheetIndicatorHeight = 4.0;
+  static const double bottomSheetButtonHeight = 59.0;
 }
