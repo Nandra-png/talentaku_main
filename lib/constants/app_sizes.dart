@@ -34,7 +34,7 @@ class AppSizes {
 
   // Specific Widget Sizes
   static const double welcomeSignHeight = 70.0;
-  static const double broadcastHeight = 200.0;
+  static const double broadcastHeight = 180.0;
   static const double classCardHeight = 126.0;
   static const double programCardHeight = 130.0;
   static const double laporanCardHeight = 160.0;

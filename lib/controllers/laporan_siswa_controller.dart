@@ -32,6 +32,7 @@ class LaporanSiswaController extends GetxController {
       description:
           'Perkembangan motorik halus semakin membaik. Siswa dapat mengikuti instruksi dengan baik dan menyelesaikan kegiatan tepat waktu.',
     ),
+  
   ];
 
   // Search Field Decoration

@@ -75,7 +75,8 @@ class LaporanSiswaScreen extends StatelessWidget {
                   itemCount: controller.filteredLaporan.length,
                   itemBuilder: (context, index) {
                     return LaporanSiswaCard(
-                      laporan: controller.filteredLaporan[index],
+                      laporan:
+                          controller.filteredLaporan.reversed.toList()[index],
                     );
                   },
                 );
