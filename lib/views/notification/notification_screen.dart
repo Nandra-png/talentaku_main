@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:talentaku/controllers/notification_controller.dart';
 import 'package:talentaku/widgets/notification_card.dart';
+import 'package:talentaku/constants/app_colors.dart';
+import 'package:talentaku/constants/app_text_styles.dart';
+import 'package:talentaku/constants/app_sizes.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({Key? key}) : super(key: key);
@@ -11,52 +14,56 @@ class NotificationScreen extends StatelessWidget {
     final controller = Get.put(NotificationController());
 
     return Scaffold(
-      backgroundColor: controller.backgroundColor,
+      backgroundColor: AppColors.background,
       body: Column(
         children: [
           Container(
-            height: 120,
+            height: AppSizes.headerHeight,
             decoration: BoxDecoration(
-              color: controller.headerColor,
-              borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(30),
-                bottomRight: Radius.circular(30),
+              color: AppColors.primary,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(AppSizes.radiusXL),
+                bottomRight: Radius.circular(AppSizes.radiusXL),
               ),
             ),
             child: SafeArea(
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: AppSizes.paddingXL),
                     child: Row(
                       children: [
                         IconButton(
-                          icon:
-                              const Icon(Icons.arrow_back, color: Colors.white),
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: AppColors.textLight,
+                            size: AppSizes.iconL,
+                          ),
                           onPressed: controller.goBack,
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 8),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: AppSizes.paddingM,
+                            vertical: AppSizes.paddingS,
+                          ),
                           decoration: BoxDecoration(
-                            color: controller.headerColor,
-                            borderRadius: BorderRadius.circular(10),
+                            color: AppColors.primary,
+                            borderRadius:
+                                BorderRadius.circular(AppSizes.radiusM),
                           ),
                           child: Row(
                             children: [
                               Image.asset(
                                 'images/logo.png',
-                                width: 26,
-                                height: 26,
+                                width: AppSizes.logoSize,
+                                height: AppSizes.logoSize,
                               ),
-                              const SizedBox(width: 8),
-                              const Text(
+                              SizedBox(width: AppSizes.paddingS),
+                              Text(
                                 'Pengumuman',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontFamily: 'Manrope',
-                                  fontWeight: FontWeight.w700,
+                                style: AppTextStyles.heading3.copyWith(
+                                  color: AppColors.textLight,
                                 ),
                               ),
                             ],
@@ -70,38 +77,42 @@ class NotificationScreen extends StatelessWidget {
             ),
           ),
 
+          // Category Tabs
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 15),
+            padding: EdgeInsets.symmetric(vertical: AppSizes.paddingL),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: AppSizes.paddingXL),
               child: Obx(() => Row(
                     children: List.generate(
                       controller.categories.length,
                       (index) => Padding(
                         padding: EdgeInsets.only(
-                            right: index < controller.categories.length - 1
-                                ? 10
-                                : 0),
+                          right: index < controller.categories.length - 1
+                              ? AppSizes.paddingM
+                              : 0,
+                        ),
                         child: _buildCategoryTab(
-                            controller.categories[index], index, controller),
+                          controller.categories[index],
+                          index,
+                          controller,
+                        ),
                       ),
                     ),
                   )),
             ),
           ),
 
-          // Notification list
+          // Notification List
           Expanded(
             child: Obx(() {
               final notifications = controller.getFilteredNotifications();
               return ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(horizontal: AppSizes.paddingXL),
                 itemCount: notifications.length,
                 itemBuilder: (context, index) {
-                  final notification = notifications[index];
                   return NotificationCard(
-                    notification: notification,
+                    notification: notifications[index],
                     controller: controller,
                   );
                 },
@@ -114,19 +125,29 @@ class NotificationScreen extends StatelessWidget {
   }
 
   Widget _buildCategoryTab(
-      String title, int index, NotificationController controller) {
+    String title,
+    int index,
+    NotificationController controller,
+  ) {
     return GestureDetector(
       onTap: () => controller.changeCategory(index),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-        decoration: controller.getCategoryTabDecoration(index),
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSizes.paddingL,
+          vertical: AppSizes.paddingS,
+        ),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: controller.selectedCategory.value == index
+                ? AppColors.primaryDark
+                : AppColors.textPrimary,
+          ),
+          borderRadius: BorderRadius.circular(AppSizes.radiusL),
+        ),
         child: Text(
           title,
-          style: TextStyle(
-            color: controller.textColor,
-            fontSize: 14,
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.w500,
+          style: AppTextStyles.bodyMedium.copyWith(
+            color: AppColors.textPrimary,
           ),
         ),
       ),

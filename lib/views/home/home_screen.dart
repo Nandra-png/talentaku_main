@@ -44,7 +44,29 @@ class HomeScreen extends StatelessWidget {
                   },
                 ),
               ),
-              SizedBox(height: AppSizes.spaceM),
+
+              SizedBox(height: AppSizes.spaceL),
+
+              CategoriesLine(categoryEvent: controller.categories[2]),
+
+              // Laporan Preview
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: AppSizes.paddingXL),
+                child: SizedBox(
+                  height: AppSizes.laporanCardHeight,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: controller.laporanPreviews.length,
+                    itemBuilder: (context, index) {
+                      return LaporanPreviewCard(
+                        laporan: controller.laporanPreviews[index],
+                      );
+                    },
+                  ),
+                ),
+              ),
+
+              SizedBox(height: AppSizes.spaceXL),
 
               // Categories and Cards
               CategoriesLine(categoryEvent: controller.categories[0]),
@@ -76,26 +98,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: AppSizes.spaceXL),
-
-              CategoriesLine(categoryEvent: controller.categories[2]),
-
-              // Laporan Preview
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: AppSizes.paddingXL),
-                child: SizedBox(
-                  height: AppSizes.laporanCardHeight,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: controller.laporanPreviews.length,
-                    itemBuilder: (context, index) {
-                      return LaporanPreviewCard(
-                        laporan: controller.laporanPreviews[index],
-                      );
-                    },
-                  ),
-                ),
-              ),
-              SizedBox(height: AppSizes.spaceL),
             ],
           ),
         ),

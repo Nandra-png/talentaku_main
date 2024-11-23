@@ -20,46 +20,42 @@ class WelcomeSign extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: AppSizes.paddingXL),
       child: Stack(
         children: [
-          Container(
-            width: double.infinity,
-            height: AppSizes.welcomeSignHeight,
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              left: AppSizes.logoSize + AppSizes.paddingXL,
-              top: AppSizes.paddingXL,
-            ),
-            child: Text(
-              'Selamat Datang,',
-              style: AppTextStyles.bodySmall,
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              left: AppSizes.logoSize + AppSizes.paddingXL,
-              top: AppSizes.paddingXL + AppSizes.paddingL,
-            ),
-            child: Text(
-              controller.userName,
-              style: AppTextStyles.heading1,
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              left: AppSizes.paddingXL,
-              top: AppSizes.paddingL,
-            ),
+          // Logo
+          Positioned(
+            left: AppSizes.paddingXL,
+            top: AppSizes.paddingL,
             child: Container(
               width: AppSizes.logoSize,
               height: AppSizes.logoSize,
-              decoration: BoxDecoration(
-                image: const DecorationImage(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
                   image: AssetImage("images/logo.png"),
-                  fit: BoxFit.fill,
+                  fit: BoxFit.contain,
                 ),
               ),
             ),
           ),
+
+          // Welcome Text
+          Positioned(
+            left: AppSizes.logoSize + AppSizes.paddingXL * 2,
+            top: AppSizes.paddingL,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Selamat Datang,',
+                  style: AppTextStyles.bodySmall,
+                ),
+                Text(
+                  controller.userName,
+                  style: AppTextStyles.heading1,
+                ),
+              ],
+            ),
+          ),
+
+          // Notification Button
           Positioned(
             right: 0,
             top: AppSizes.paddingL,
