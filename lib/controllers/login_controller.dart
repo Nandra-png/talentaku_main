@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:talentaku/constants/app_colors.dart';
+import 'package:talentaku/views/login/login.dart';
+import '../constants/app_sizes.dart';
 import '../models/login_models.dart';
 import '../models/profile_image_picker.dart';
 import '../models/text_pair.dart';
@@ -17,12 +20,24 @@ class LoginController extends GetxController {
 
   // Observable for image picked state
   var isImagePicked = false.obs;
+  var profileImage = ''.obs; // Store the picked image path
+
+  // Function to create a CustomTextPair model
+  CustomTextPairModel getPair() {
+    return CustomTextPairModel(
+      primaryText: "Selamat Datang",
+      secondaryText: "Semangat buat hari ini ya...",
+      primaryStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: Colors.black),
+      secondaryStyle: TextStyle(fontSize: 16, color: Colors.black),
+      alignment: CrossAxisAlignment.start,
+    );
+  }
 
   // Function to create a CustomTextPair model
   CustomTextPairModel getCustomTextPair() {
     return CustomTextPairModel(
-      primaryText: "Selamat Datang",
-      secondaryText: "Semangat buat hari ini ya...",
+      primaryText: "Narendra",
+      secondaryText: "Siswa KB",
       primaryStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: Colors.black),
       secondaryStyle: TextStyle(fontSize: 16, color: Colors.black),
       alignment: CrossAxisAlignment.start,
@@ -52,12 +67,12 @@ class LoginController extends GetxController {
   ProfileImagePickerModel getProfileImagePickerModel(BuildContext context) {
     return ProfileImagePickerModel(
       image: isImagePicked.value
-          ? AssetImage('')
-          : AssetImage(''),
+          ? AssetImage(profileImage.value) // Use the selected image
+          : AssetImage('assets/default_avatar.png'), // Use default avatar if no image selected
       avatarRadius: 60,
       cameraRadius: 20,
       cameraBackgroundColor: Colors.blue,
-      cameraIcon: const Icon(Icons.add_a_photo, color: Colors.white),
+      cameraIcon: Icon(Icons.add_a_photo, color: AppColors.textLight),
       onCameraTap: () {
         showModalBottomSheet(
           context: context,
@@ -71,7 +86,7 @@ class LoginController extends GetxController {
                     "Pilih dari",
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: AppSizes.spaceXL),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -80,7 +95,7 @@ class LoginController extends GetxController {
                         label: "Camera",
                         onTap: () {
                           Navigator.pop(context);
-                          isImagePicked.value = true;
+                          pickImageFromCamera(context);  // Open camera when Camera is selected
                         },
                       ),
                       buildOption(
@@ -88,32 +103,11 @@ class LoginController extends GetxController {
                         label: "Gallery",
                         onTap: () {
                           Navigator.pop(context);
-                          isImagePicked.value = true;
+                          pickImageFromGallery(context); // Open gallery when Gallery is selected
                         },
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () => Navigator.pop(context),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50), // Rounded corners for pill shape
-                      ),
-                      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 30), // Spacing inside the button
-                      elevation: 0, // Remove shadow for a flatter look
-                      textStyle: TextStyle(
-                        fontSize: 16, // Font size
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                    child: const Text(
-                      "Cancel",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  )
-
                 ],
               ),
             );
@@ -121,6 +115,43 @@ class LoginController extends GetxController {
         );
       },
     );
+  }
+
+  // Function to pick image from Camera
+  Future<void> pickImageFromCamera(BuildContext context) async {
+    final picker = ImagePicker();
+
+    // Pick image from the camera
+    final XFile? pickedFile = await picker.pickImage(source: ImageSource.camera);
+
+    if (pickedFile != null) {
+      // If an image is picked, you can handle the image file here
+      profileImage.value = pickedFile.path;
+      isImagePicked.value = true;
+      print("Image picked: ${pickedFile.path}");
+      // Optionally, you can also show the image preview in the UI here
+    } else {
+      // Handle case when user cancels camera action
+      print("No image selected.");
+    }
+  }
+
+  // Function to pick image from Gallery
+  Future<void> pickImageFromGallery(BuildContext context) async {
+    final picker = ImagePicker();
+
+    // Pick image from gallery
+    final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      // If an image is picked, update the state with the selected image
+      profileImage.value = pickedFile.path;
+      isImagePicked.value = true;
+      print("Image picked from gallery: ${pickedFile.path}");
+    } else {
+      // Handle case when user cancels gallery action
+      print("No image selected.");
+    }
   }
 
   // Option for selecting from camera or gallery
@@ -164,18 +195,40 @@ class LoginController extends GetxController {
   // Handle login action
   void onLoginPressed(BuildContext context) {
     if (isValid()) {
-      Get.to(() => LoginPickImage()); // Navigate to another screen if valid
+      Get.to(() => LoginPickImage());
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Username dan password harus diisi!", style: TextStyle(color: Colors.white)),
-          backgroundColor: Colors.red,
-          behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.fromLTRB(20, 50, 20, 0),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        ),
+      Get.snackbar(
+        'Error',
+        'Username dan password harus diisi!',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.TOP,
+        margin: const EdgeInsets.all(AppSizes.paddingXL),
       );
     }
+  }
+
+  // Reset the form fields
+  void resetForm() {
+    usernameController.clear();
+    passwordController.clear();
+    isImagePicked.value = false;  // Reset the image picker state
+    profileImage.value = '';  // Clear the image path
+  }
+
+  // Handle logout action
+  void onLogoutPressed(BuildContext context) {
+    // Show logout confirmation snack bar
+    Get.snackbar(
+      'Anda Berhasil Logout',
+      'Anda telah keluar dari akun Anda.',
+      backgroundColor: Colors.red,
+      colorText: Colors.white,
+      snackPosition: SnackPosition.TOP,
+      margin: const EdgeInsets.all(AppSizes.paddingXL),
+    );
+    resetForm();
+    Get.offAll(() => LoginScreen());
   }
 
   @override

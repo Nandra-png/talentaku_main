@@ -21,6 +21,14 @@ class AppSizes {
   static const double cardWidth = 280.0;
   static const double cardHeight = 160.0;
 
+  //card profile
+  static const double profileCardWidth = 350.0;
+  static const double profileCardHeigth = 70.0;
+
+  //buttonlogout
+  static const double logout = 150.0;
+
+
   // Container Heights
   static const double headerHeight = 120.0;
   static const double bottomNavHeight = 90.0;

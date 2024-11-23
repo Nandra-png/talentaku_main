@@ -19,15 +19,16 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => Splashscreen(), // Splashscreen route
-        '/login': (context) => const LoginScreen(), // Login screen route
-        '/home': (context) => const HomeScreen(), // Main home screen route
+        '/': (context) => Splashscreen(),
+        '/login': (context) => const LoginScreen(),
+        '/home': (context) => const HomeScreen(),
       },
       initialBinding: BindingsBuilder(() {
         Get.put(
-            NavigationController()); // Initial bindings for NavigationController
+            NavigationController());
       }),
     );
   }
@@ -43,7 +44,7 @@ class MainScreen extends GetView<NavigationController> {
       body: Obx(
             () => IndexedStack(
           index: controller.selectedIndex.value,
-          children: const [
+          children: [
             HomeScreen(),
             LaporanSiswaScreen(),
             KelasScreen(),

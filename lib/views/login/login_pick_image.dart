@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:talentaku/constants/app_colors.dart';
 import 'package:talentaku/main.dart';
-import 'package:talentaku/views/home/home_screen.dart';
 
 import '../../constants/app_sizes.dart';
 import '../../controllers/login_controller.dart';
-import '../../models/button_login.dart';
 import '../../widgets/custom_text_pair.dart';
 import '../../widgets/login_button.dart';
 import '../../widgets/profile_image.dart';
@@ -47,7 +45,7 @@ class LoginPickImage extends StatelessWidget {
 
                       // CustomTextPairWidget
                       CustomTextPairWidget(
-                        model: controller.getCustomTextPair(),
+                        model: controller.getPair(),
                       ),
 
                       SizedBox(height: AppSizes.spaceXL),
@@ -60,11 +58,15 @@ class LoginPickImage extends StatelessWidget {
                       SizedBox(height: AppSizes.spaceXL),
 
                       ReusableButton(
-                        model: ReusableButtonModel(
-                          buttonText: 'Lanjut',
-                          targetScreen: MainScreen(),
-                        ),
-                      )
+                        buttonText: 'Lanjut',
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => MainScreen()),
+                          );
+                        },
+                        icon: Icons.arrow_forward_ios_rounded,
+                      ),
                     ],
                   ),
                 ),

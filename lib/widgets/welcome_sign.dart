@@ -30,7 +30,7 @@ class WelcomeSign extends StatelessWidget {
               top: AppSizes.paddingXL,
             ),
             child: Text(
-              'Selamat Datang,',
+              'Selamat Pagi,',
               style: AppTextStyles.bodySmall,
             ),
           ),

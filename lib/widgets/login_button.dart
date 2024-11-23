@@ -1,48 +1,58 @@
-// widgets/reusable_button.dart
 import 'package:flutter/material.dart';
-import 'package:talentaku/constants/app_colors.dart';
-
-import '../models/button_login.dart';
+import '../constants/app_colors.dart';
 
 class ReusableButton extends StatelessWidget {
-  final ReusableButtonModel model;
+  final String buttonText;
+  final VoidCallback onPressed;
+  final IconData? icon;
+  final bool isFullWidth;
+  final double height;
+  final Color? backgroundColor;
+  final Color? textColor;
+  final double? fontSize;
 
-  const ReusableButton({super.key, required this.model});
+  const ReusableButton({
+    super.key,
+    required this.buttonText,
+    required this.onPressed,
+    this.icon,
+    this.isFullWidth = true,
+    this.height = 50,
+    this.backgroundColor,
+    this.textColor,
+    this.fontSize,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
-      minWidth: double.infinity,
-      height: 50,
-      onPressed: () {
-        // Navigate to the target screen when button is clicked
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => model.targetScreen),
-        );
-      },
-      color: AppColors.primary,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-      elevation: 0,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            model.buttonText,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18,
+    return SizedBox(
+      width: isFullWidth ? double.infinity : null, // This is controlled by the parent widget
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: backgroundColor ?? AppColors.primary,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          minimumSize: Size(0, height),
+        ),
+        onPressed: onPressed,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              buttonText,
+              style: TextStyle(
+                color: textColor ?? AppColors.textLight,
+                fontSize: fontSize ?? 18,
+              ),
             ),
-          ),
-          const SizedBox(width: 10),
-          const Icon(
-            size: 20,
-            Icons.arrow_forward_ios_rounded,
-            color: Colors.white,
-          ),
-        ],
+            if (icon != null) ...[
+              const SizedBox(width: 10),
+              Icon(icon, color: textColor ?? AppColors.textLight, size: 20),
+            ]
+          ],
+        ),
       ),
     );
   }

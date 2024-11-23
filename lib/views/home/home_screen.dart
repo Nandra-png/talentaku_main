@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: AppSizes.spaceL),
+              SizedBox(height: AppSizes.spaceXS),
               const WelcomeSign(),
               SizedBox(height: AppSizes.spaceXS),
 
