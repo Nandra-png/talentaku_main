@@ -37,8 +37,8 @@ class LoginController extends GetxController {
   // Function to create a CustomTextPair model
   CustomTextPairModel getCustomTextPair() {
     return CustomTextPairModel(
-      primaryText: "Selamat Datang",
-      secondaryText: "Semangat buat hari ini ya...",
+      primaryText: "Narendra",
+      secondaryText: "Siswa KB",
       primaryStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: Colors.black),
       secondaryStyle: TextStyle(fontSize: 16, color: Colors.black),
       alignment: CrossAxisAlignment.start,
