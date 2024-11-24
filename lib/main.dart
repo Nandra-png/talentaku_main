@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:talentaku/views/login/login.dart';
 import 'package:talentaku/views/splash_screen/splashscreen.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'controllers/navigation_controller.dart';
 import 'views/home/home_screen.dart';
 import 'views/laporan_siswa/laporan_siswa_screen.dart';
@@ -9,7 +10,10 @@ import 'views/kelas/kelas_screen.dart';
 import 'views/profile/profile_screen.dart';
 import 'widgets/bottom_nav.dart';
 
-void main() {
+void main() async {
+  // Inisialisasi locale data untuk format tanggal bahasa Indonesia
+  await initializeDateFormatting('id_ID', null);
+
   runApp(const MainApp());
 }
 
@@ -21,13 +25,12 @@ class MainApp extends StatelessWidget {
     return GetMaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => Splashscreen(), // Splashscreen route
-        '/login': (context) => const LoginScreen(), // Login screen route
-        '/home': (context) => const HomeScreen(), // Main home screen route
+        '/': (context) => Splashscreen(),
+        '/login': (context) => const LoginScreen(),
+        '/home': (context) => const HomeScreen(),
       },
       initialBinding: BindingsBuilder(() {
-        Get.put(
-            NavigationController()); // Initial bindings for NavigationController
+        Get.put(NavigationController());
       }),
     );
   }
@@ -41,7 +44,7 @@ class MainScreen extends GetView<NavigationController> {
     return Scaffold(
       extendBody: true,
       body: Obx(
-            () => IndexedStack(
+        () => IndexedStack(
           index: controller.selectedIndex.value,
           children: const [
             HomeScreen(),
