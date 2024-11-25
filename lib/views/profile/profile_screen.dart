@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../constants/app_sizes.dart';
+import '../../constants/app_colors.dart';
 import '../../controllers/profile_controller.dart';
 import '../../controllers/login_controller.dart';
 import '../../widgets/custom_text_pair.dart';
@@ -18,96 +19,89 @@ class ProfileScreen extends StatelessWidget {
     final loginController = Get.put(LoginController());
 
     return Scaffold(
+      backgroundColor: AppColors.background,
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(AppSizes.paddingXS),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(height: AppSizes.spaceXL),
-              const WelcomeSign(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(height: AppSizes.spaceXL),
+            const WelcomeSign(),
+            const SizedBox(height: AppSizes.spaceL),
 
-              const SizedBox(height: AppSizes.spaceL),
+            // ProfileImagePicker
+            ProfileImagePicker(
+              model: loginController.getProfileImagePickerModel(context),
+            ),
 
-              // ProfileImagePicker
-              ProfileImagePicker(
-                model: loginController.getProfileImagePickerModel(context),
-              ),
+            const SizedBox(height: AppSizes.spaceXS),
 
-              const SizedBox(height: AppSizes.spaceXS),
+            CustomTextPairWidget(
+              model: loginController.getCustomTextPair(),
+            ),
 
-              // CustomTextPairWidget
-              CustomTextPairWidget(
-                model: loginController.getCustomTextPair(),
-              ),
+            const SizedBox(height: AppSizes.spaceM),
 
-              const SizedBox(height: AppSizes.spaceM),
-
-              // Row to display name and NIS in a single row
-              // Row to display name and NIS in a single row
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+            // Row untuk NIS dan Kelompok
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: AppSizes.paddingXL),
+              child: Row(
                 children: [
-                  Container(
-                    width: AppSizes.profile,
+                  Expanded(
                     child: TextPairWidget(
-                      icon: Icons.list_alt,
                       model: profileController.getTextPair('NIS'),
                       boxStyle: BoxStyle.border,
                     ),
                   ),
-                  const SizedBox(width: AppSizes.spaceS),
-                  Container(
-                    width: AppSizes.profile,
+                  SizedBox(width: AppSizes.spaceM),
+                  Expanded(
                     child: TextPairWidget(
-                      icon: Icons.list_alt,
                       model: profileController.getTextPair('Kelompok'),
                       boxStyle: BoxStyle.border,
                     ),
                   ),
                 ],
               ),
+            ),
 
-              const SizedBox(height: AppSizes.spaceM),
+            const SizedBox(height: AppSizes.spaceM),
 
-              // Additional profile info
-              Obx(() {
-                return Column(
-                  children: [
-                    TextPairWidget(
-                      model: profileController.getTextPair('Nama Lengkap'),
-                    ),
-                    const SizedBox(height: AppSizes.spaceS),
-                    TextPairWidget(
-                      model: profileController
-                          .getTextPair('Tempat, Tanggal Lahir'),
-                    ),
-                    const SizedBox(height: AppSizes.spaceS),
-                    TextPairWidget(
-                      model: profileController.getTextPair('Alamat'),
-                    ),
-                    const SizedBox(height: AppSizes.spaceS),
-                  ],
-                );
-              }),
-
-              const SizedBox(height: AppSizes.spaceM),
-
-              // Logout Button
-              SizedBox(
-                width: 150,
-                child: ReusableButton(
-                  buttonText: "Logout",
-                  icon: Icons.logout,
-                  onPressed: () {
-                    loginController.onLogoutPressed(context);
-                  },
-                  backgroundColor: Colors.red,
-                  textColor: Colors.white,
-                ),
+            // Informasi profil tambahan dengan padding horizontal
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: AppSizes.paddingXL),
+              child: Column(
+                children: [
+                  TextPairWidget(
+                    model: profileController.getTextPair('Nama Lengkap'),
+                  ),
+                  const SizedBox(height: AppSizes.spaceS),
+                  TextPairWidget(
+                    model:
+                        profileController.getTextPair('Tempat, Tanggal Lahir'),
+                  ),
+                  const SizedBox(height: AppSizes.spaceS),
+                  TextPairWidget(
+                    model: profileController.getTextPair('Alamat'),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+
+            const SizedBox(height: AppSizes.spaceL),
+
+            // Logout Button
+            SizedBox(
+              width: 150,
+              child: ReusableButton(
+                buttonText: "Logout",
+                icon: Icons.logout,
+                onPressed: () {
+                  loginController.onLogoutPressed(context);
+                },
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+              ),
+            ),
+          ],
         ),
       ),
     );

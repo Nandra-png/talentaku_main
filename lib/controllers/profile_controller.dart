@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:talentaku/constants/app_colors.dart';
+import 'package:talentaku/controllers/home_controller.dart';
 import '../models/profile_models.dart';
 
 class ProfileController extends GetxController {
-  var user = Rx<UserModel>(
-    UserModel(
-      name: 'Narendra',
-      nis: '123456',
-      birthPlaceAndDate: 'Jakarta, 1 Januari 2000',
-      address: 'Jl. Raya No. 1',
-      group: 'Pelangi',
-    ),
-  );
+  late HomeController homeController;
+  
+  @override
+  void onInit() {
+    super.onInit();
+    homeController = Get.find<HomeController>();
+  }
 
   TextPair getTextPair(String primaryText) {
     String secondaryText;
@@ -20,20 +19,20 @@ class ProfileController extends GetxController {
 
     switch (primaryText) {
       case 'Nama Lengkap':
-        secondaryText = user.value.name;
+        secondaryText = homeController.userName;
         break;
       case 'NIS':
-        secondaryText = user.value.nis;
+        secondaryText = '123456';
         break;
       case 'Tempat, Tanggal Lahir':
-        secondaryText = user.value.birthPlaceAndDate;
+        secondaryText = 'Jakarta, 1 Januari 2020';
         break;
       case 'Alamat':
-        secondaryText = user.value.address;
+        secondaryText = 'Jl. Raya No. 1';
         break;
       case 'Kelompok':
-        secondaryText = user.value.group;
-        icon = Icons.group; 
+        secondaryText = 'Pelangi';
+        icon = Icons.group;
         break;
       default:
         secondaryText = '';
@@ -43,12 +42,17 @@ class ProfileController extends GetxController {
       primaryText: primaryText,
       secondaryText: secondaryText,
       primaryStyle: TextStyle(
-          fontWeight: FontWeight.bold, fontSize: 18, color: AppColors.textDark),
-      secondaryStyle: TextStyle(fontSize: 14, color: AppColors.textPrimary),
+        fontWeight: FontWeight.w600,
+        fontSize: 14,
+        color: AppColors.textDark,
+      ),
+      secondaryStyle: TextStyle(
+        fontSize: 12,
+        color: AppColors.textPrimary,
+      ),
       alignment: CrossAxisAlignment.start,
-      icon: icon, // Pass icon if available
+      icon: icon,
     );
   }
-
 }
 

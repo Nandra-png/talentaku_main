@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:talentaku/controllers/home_controller.dart';
 import '../constants/app_colors.dart';
 import '../constants/app_sizes.dart';
 import '../models/login_models.dart';
@@ -28,7 +29,8 @@ class LoginController extends GetxController {
     return CustomTextPairModel(
       primaryText: "Selamat Datang",
       secondaryText: "Semangat buat hari ini ya...",
-      primaryStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: Colors.black),
+      primaryStyle: TextStyle(
+          fontWeight: FontWeight.bold, fontSize: 24, color: Colors.black),
       secondaryStyle: TextStyle(fontSize: 16, color: Colors.black),
       alignment: CrossAxisAlignment.start,
     );
@@ -36,10 +38,12 @@ class LoginController extends GetxController {
 
   // Function to create a CustomTextPair model
   CustomTextPairModel getCustomTextPair() {
+    final homeController = Get.find<HomeController>();
     return CustomTextPairModel(
-      primaryText: "Narendra",
+      primaryText: homeController.userName,
       secondaryText: "Siswa KB",
-      primaryStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: AppColors.textDark),
+      primaryStyle: TextStyle(
+          fontWeight: FontWeight.bold, fontSize: 24, color: AppColors.textDark),
       secondaryStyle: TextStyle(fontSize: 16, color: AppColors.primary),
       alignment: CrossAxisAlignment.start,
     );
@@ -117,7 +121,8 @@ class LoginController extends GetxController {
 
   Future<void> pickImageFromCamera(BuildContext context) async {
     final picker = ImagePicker();
-    final XFile? pickedFile = await picker.pickImage(source: ImageSource.camera);
+    final XFile? pickedFile =
+        await picker.pickImage(source: ImageSource.camera);
 
     if (pickedFile != null) {
       profileImage.value = pickedFile.path;
@@ -127,7 +132,8 @@ class LoginController extends GetxController {
 
   Future<void> pickImageFromGallery(BuildContext context) async {
     final picker = ImagePicker();
-    final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    final XFile? pickedFile =
+        await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
       profileImage.value = pickedFile.path;
