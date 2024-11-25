@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../constants/app_colors.dart';
+import '../constants/app_sizes.dart';
 
 class ReusableButton extends StatelessWidget {
   final String buttonText;
@@ -17,7 +18,7 @@ class ReusableButton extends StatelessWidget {
     required this.onPressed,
     this.icon,
     this.isFullWidth = true,
-    this.height = 50,
+    this.height = AppSizes.detailHeaderRadius,
     this.backgroundColor,
     this.textColor,
     this.fontSize,
@@ -32,7 +33,7 @@ class ReusableButton extends StatelessWidget {
           backgroundColor: backgroundColor ?? AppColors.primary,
           elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(AppSizes.radiusXL),
           ),
           minimumSize: Size(0, height),
         ),
@@ -48,7 +49,7 @@ class ReusableButton extends StatelessWidget {
               ),
             ),
             if (icon != null) ...[
-              const SizedBox(width: 10),
+              const SizedBox(width: AppSizes.paddingS),
               Icon(icon, color: textColor ?? AppColors.textLight, size: 20),
             ]
           ],

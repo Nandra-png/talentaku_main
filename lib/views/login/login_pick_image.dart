@@ -21,7 +21,7 @@ class LoginPickImage extends StatelessWidget {
       body: Center(
         child: SingleChildScrollView(
           child: Container(
-            padding: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(AppSizes.spaceXS),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -31,11 +31,11 @@ class LoginPickImage extends StatelessWidget {
                   fit: BoxFit.fill,
                 ),
                 Container(
-                  padding: const EdgeInsets.all(20),
-                  margin: const EdgeInsets.all(30),
+                  padding: const EdgeInsets.all(AppSizes.spaceL),
+                  margin: const EdgeInsets.all(AppSizes.avatarIconSize),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: Colors.white,
+                    color: AppColors.textLight,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,

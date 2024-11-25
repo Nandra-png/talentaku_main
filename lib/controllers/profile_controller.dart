@@ -42,13 +42,13 @@ class ProfileController extends GetxController {
       primaryText: primaryText,
       secondaryText: secondaryText,
       primaryStyle: TextStyle(
-        fontWeight: FontWeight.w600,
-        fontSize: 14,
-        color: AppColors.textDark,
-      ),
-      secondaryStyle: TextStyle(
         fontSize: 12,
         color: AppColors.textPrimary,
+      ),
+      secondaryStyle: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 18,
+        color: AppColors.textDark,
       ),
       alignment: CrossAxisAlignment.start,
       icon: icon,

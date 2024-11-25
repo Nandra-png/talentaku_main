@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:talentaku/constants/app_colors.dart';
+import '../constants/app_sizes.dart';
 import '../models/profile_image_picker.dart';
 
 class ProfileImagePicker extends StatelessWidget {
@@ -47,14 +48,14 @@ class ProfileImagePicker extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CircleAvatar(
-            radius: 25,
+            radius: AppSizes.radiusXXL,
             backgroundColor: Colors.grey.shade300,
             child: Icon(
               icon,
               color: Colors.black,
             ),
           ),
-          const SizedBox(height: 5),
+          const SizedBox(height: AppSizes.paddingS),
           Text(label),
         ],
       ),

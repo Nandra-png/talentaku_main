@@ -29,9 +29,9 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: AppSizes.spaceL),
 
             // ProfileImagePicker
-            ProfileImagePicker(
+            Obx(() => ProfileImagePicker(
               model: loginController.getProfileImagePickerModel(context),
-            ),
+            )),
 
             const SizedBox(height: AppSizes.spaceXS),
 

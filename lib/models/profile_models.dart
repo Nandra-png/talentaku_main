@@ -16,13 +16,13 @@ class UserModel {
   });
 }
 
-class TextPair { // Renamed correctly
+class TextPair {
   final String primaryText;
   final String secondaryText;
   final TextStyle primaryStyle;
   final TextStyle secondaryStyle;
   final CrossAxisAlignment alignment;
-  final IconData? icon;  // Optional icon for horizontal layout
+  final IconData? icon;
 
   TextPair({
     required this.primaryText,

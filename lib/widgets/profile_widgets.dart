@@ -23,7 +23,7 @@ class TextPairWidget extends StatelessWidget {
     BoxDecoration boxDecoration = boxStyle == BoxStyle.shadow
         ? BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(AppSizes.radiusM),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.2),
@@ -37,7 +37,7 @@ class TextPairWidget extends StatelessWidget {
               color: AppColors.primary,
               width: 1.5,
             ),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(AppSizes.radiusM),
           );
 
     return Container(

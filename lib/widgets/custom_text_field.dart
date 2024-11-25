@@ -18,23 +18,23 @@ class CustomTextFieldWidget extends StatelessWidget {
       decoration: InputDecoration(
         labelText: model.labelText,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(AppSizes.radiusXL),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColors.primary),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(AppSizes.radiusXL),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColors.primary),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(AppSizes.radiusXL),
         ),
         contentPadding: EdgeInsets.symmetric(
-          vertical: AppSizes.paddingL, // Menambah padding vertikal
-          horizontal: AppSizes.paddingL // Menambah padding horizontal
+          vertical: AppSizes.paddingL,
+          horizontal: AppSizes.paddingL
         ),
       ),
       style: TextStyle(
-        fontSize: AppSizes.spaceM, // Misalnya, ukuran font menengah
+        fontSize: AppSizes.spaceM,
       ),
     );
   }
