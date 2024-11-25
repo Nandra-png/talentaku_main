@@ -1,10 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:talentaku/models/laporan_preview_event.dart';
-import 'package:talentaku/constants/app_colors.dart';
-import 'package:talentaku/constants/app_text_styles.dart';
-import 'package:talentaku/constants/app_sizes.dart';
 import 'package:talentaku/widgets/date_picker_card.dart';
 
 class LaporanSiswaController extends GetxController {

@@ -4,7 +4,6 @@ import 'package:talentaku/controllers/notification_controller.dart';
 import 'package:talentaku/constants/app_colors.dart';
 import 'package:talentaku/constants/app_text_styles.dart';
 import 'package:talentaku/constants/app_sizes.dart';
-import 'package:talentaku/constants/app_decorations.dart';
 
 class NotificationCard extends StatelessWidget {
   final NotificationEvent notification;

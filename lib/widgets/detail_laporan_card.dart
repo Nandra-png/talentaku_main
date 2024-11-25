@@ -84,4 +84,4 @@ class DetailLaporanCard extends StatelessWidget {
       ),
     );
   }
-} 
+}
