@@ -5,21 +5,24 @@ class UserModel {
   final String nis;
   final String birthPlaceAndDate;
   final String address;
+  final String group;
 
   UserModel({
     required this.name,
     required this.nis,
     required this.birthPlaceAndDate,
     required this.address,
+    required this.group,
   });
 }
 
-class TextPair { // Fix: Rename from TextPaiR to TextPair
+class TextPair { // Renamed correctly
   final String primaryText;
   final String secondaryText;
   final TextStyle primaryStyle;
   final TextStyle secondaryStyle;
   final CrossAxisAlignment alignment;
+  final IconData? icon;  // Optional icon for horizontal layout
 
   TextPair({
     required this.primaryText,
@@ -27,5 +30,6 @@ class TextPair { // Fix: Rename from TextPaiR to TextPair
     required this.primaryStyle,
     required this.secondaryStyle,
     required this.alignment,
+    this.icon, // Add optional icon
   });
 }

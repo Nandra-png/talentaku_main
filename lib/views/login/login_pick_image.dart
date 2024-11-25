@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:talentaku/constants/app_colors.dart';
 import 'package:talentaku/main.dart';
-
 import '../../constants/app_sizes.dart';
 import '../../controllers/login_controller.dart';
 import '../../widgets/custom_text_pair.dart';
@@ -50,10 +49,10 @@ class LoginPickImage extends StatelessWidget {
 
                       SizedBox(height: AppSizes.spaceXL),
 
-                      // ProfileImagePicker
-                      ProfileImagePicker(
+                      // ProfileImagePicker wrapped in Obx for real-time updates
+                      Obx(() => ProfileImagePicker(
                         model: controller.getProfileImagePickerModel(context),
-                      ),
+                      )),
 
                       SizedBox(height: AppSizes.spaceXL),
 

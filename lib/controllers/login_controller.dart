@@ -39,8 +39,8 @@ class LoginController extends GetxController {
     return CustomTextPairModel(
       primaryText: "Narendra",
       secondaryText: "Siswa KB",
-      primaryStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: Colors.black),
-      secondaryStyle: TextStyle(fontSize: 16, color: Colors.black),
+      primaryStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: AppColors.textDark),
+      secondaryStyle: TextStyle(fontSize: 16, color: AppColors.primary),
       alignment: CrossAxisAlignment.start,
     );
   }
@@ -65,8 +65,8 @@ class LoginController extends GetxController {
   ProfileImagePickerModel getProfileImagePickerModel(BuildContext context) {
     return ProfileImagePickerModel(
       image: isImagePicked.value
-          ? FileImage(File(profileImage.value)) // Use FileImage for local files
-          : AssetImage('') as ImageProvider, // Cast to ImageProvider
+          ? FileImage(File(profileImage.value))
+          : AssetImage('images/default_image.png') as ImageProvider,
       avatarRadius: 60,
       cameraRadius: 20,
       cameraBackgroundColor: AppColors.backgroundLogin,

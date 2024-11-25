@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:talentaku/constants/app_colors.dart';
 import '../models/profile_models.dart';
 
 class ProfileController extends GetxController {
@@ -9,11 +10,14 @@ class ProfileController extends GetxController {
       nis: '123456',
       birthPlaceAndDate: 'Jakarta, 1 Januari 2000',
       address: 'Jl. Raya No. 1',
+      group: 'Pelangi',
     ),
   );
 
   TextPair getTextPair(String primaryText) {
     String secondaryText;
+    IconData? icon;
+
     switch (primaryText) {
       case 'Nama Lengkap':
         secondaryText = user.value.name;
@@ -27,6 +31,10 @@ class ProfileController extends GetxController {
       case 'Alamat':
         secondaryText = user.value.address;
         break;
+      case 'Kelompok':
+        secondaryText = user.value.group;
+        icon = Icons.group;  // Add an icon for Kelompok
+        break;
       default:
         secondaryText = '';
     }
@@ -35,9 +43,12 @@ class ProfileController extends GetxController {
       primaryText: primaryText,
       secondaryText: secondaryText,
       primaryStyle: TextStyle(
-          fontWeight: FontWeight.bold, fontSize: 18, color: Colors.black),
-      secondaryStyle: TextStyle(fontSize: 14, color: Colors.grey),
+          fontWeight: FontWeight.bold, fontSize: 18, color: AppColors.textDark),
+      secondaryStyle: TextStyle(fontSize: 14, color: AppColors.textPrimary),
       alignment: CrossAxisAlignment.start,
+      icon: icon, // Pass icon if available
     );
   }
+
 }
+
