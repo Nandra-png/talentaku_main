@@ -20,10 +20,35 @@ class WelcomeSign extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: AppSizes.paddingXL),
       child: Stack(
         children: [
-          // Logo
-          Positioned(
-            left: AppSizes.paddingXL,
-            top: AppSizes.paddingL,
+          Container(
+            width: double.infinity,
+            height: AppSizes.welcomeSignHeight,
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+              left: AppSizes.logoSize + AppSizes.paddingXL,
+              top: AppSizes.paddingXL,
+            ),
+            child: Text(
+              'Selamat Pagi,',
+              style: AppTextStyles.bodySmall,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+              left: AppSizes.logoSize + AppSizes.paddingXL,
+              top: AppSizes.paddingXL + AppSizes.paddingL,
+            ),
+            child: Text(
+              controller.userName,
+              style: AppTextStyles.heading1,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+              left: AppSizes.paddingXL,
+              top: AppSizes.paddingL,
+            ),
             child: Container(
               width: AppSizes.logoSize,
               height: AppSizes.logoSize,

@@ -16,10 +16,19 @@ class AppSizes {
   static const double iconS = 12.0;
   static const double iconM = 20.0;
   static const double iconL = 24.0;
+  static const double iconXL = 40.0;
 
   // Card Sizes
   static const double cardWidth = 280.0;
   static const double cardHeight = 160.0;
+
+  //card profile
+  static const double profileCardWidth = 350.0;
+  static const double profileCardHeigth = 70.0;
+
+  //buttonlogout
+  static const double logout = 150.0;
+
 
   // Container Heights
   static const double headerHeight = 120.0;
@@ -30,7 +39,7 @@ class AppSizes {
   static const double spaceS = 10.0;
   static const double spaceM = 15.0;
   static const double spaceL = 20.0;
-  static const double spaceXL = 30.0;
+  static const double spaceXL = 35.0;
 
   // Specific Widget Sizes
   static const double welcomeSignHeight = 70.0;
@@ -38,6 +47,7 @@ class AppSizes {
   static const double classCardHeight = 126.0;
   static const double programCardHeight = 130.0;
   static const double laporanCardHeight = 160.0;
+  static const double profile = 150.0;
   static const double categoryLineHeight = 64.0;
   static const double avatarSize = 40.0;
   static const double logoSize = 26.0;

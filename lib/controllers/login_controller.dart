@@ -1,11 +1,15 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:talentaku/constants/app_colors.dart';
+import 'package:image_picker/image_picker.dart';
+import '../constants/app_colors.dart';
+import '../constants/app_sizes.dart';
 import '../models/login_models.dart';
 import '../models/profile_image_picker.dart';
 import '../models/text_pair.dart';
 import '../models/text_field.dart'; // Import CustomTextFieldModel
 import '../views/login/login_pick_image.dart';
+import '../views/login/login.dart';
 
 class LoginController extends GetxController {
   // Login model for state management
@@ -17,9 +21,10 @@ class LoginController extends GetxController {
 
   // Observable for image picked state
   var isImagePicked = false.obs;
+  var profileImage = ''.obs;
 
   // Function to create a CustomTextPair model
-  CustomTextPairModel getCustomTextPair() {
+  CustomTextPairModel getPair() {
     return CustomTextPairModel(
       primaryText: "Selamat Datang",
       secondaryText: "Semangat buat hari ini ya...",
@@ -29,7 +34,17 @@ class LoginController extends GetxController {
     );
   }
 
-  // Function to create CustomTextFieldModel for username
+  // Function to create a CustomTextPair model
+  CustomTextPairModel getCustomTextPair() {
+    return CustomTextPairModel(
+      primaryText: "Narendra",
+      secondaryText: "Siswa KB",
+      primaryStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: AppColors.textDark),
+      secondaryStyle: TextStyle(fontSize: 16, color: AppColors.primary),
+      alignment: CrossAxisAlignment.start,
+    );
+  }
+
   CustomTextFieldModel getUsernameModel() {
     return CustomTextFieldModel(
       controller: usernameController,
@@ -38,7 +53,6 @@ class LoginController extends GetxController {
     );
   }
 
-  // Function to create CustomTextFieldModel for password
   CustomTextFieldModel getPasswordModel() {
     return CustomTextFieldModel(
       controller: passwordController,
@@ -48,22 +62,21 @@ class LoginController extends GetxController {
     );
   }
 
-  // Profile image picker model
   ProfileImagePickerModel getProfileImagePickerModel(BuildContext context) {
     return ProfileImagePickerModel(
       image: isImagePicked.value
-          ? AssetImage('')
-          : AssetImage(''),
+          ? FileImage(File(profileImage.value))
+          : AssetImage('images/default_image.png') as ImageProvider,
       avatarRadius: 60,
       cameraRadius: 20,
-      cameraBackgroundColor: Colors.blue,
-      cameraIcon: const Icon(Icons.add_a_photo, color: Colors.white),
+      cameraBackgroundColor: AppColors.backgroundLogin,
+      cameraIcon: Icon(Icons.add_a_photo, color: AppColors.textLight),
       onCameraTap: () {
         showModalBottomSheet(
           context: context,
           builder: (context) {
             return Container(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(AppSizes.spaceM),
               height: 230,
               child: Column(
                 children: [
@@ -71,7 +84,7 @@ class LoginController extends GetxController {
                     "Pilih dari",
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: AppSizes.spaceXL),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -80,7 +93,7 @@ class LoginController extends GetxController {
                         label: "Camera",
                         onTap: () {
                           Navigator.pop(context);
-                          isImagePicked.value = true;
+                          pickImageFromCamera(context);
                         },
                       ),
                       buildOption(
@@ -88,32 +101,11 @@ class LoginController extends GetxController {
                         label: "Gallery",
                         onTap: () {
                           Navigator.pop(context);
-                          isImagePicked.value = true;
+                          pickImageFromGallery(context);
                         },
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () => Navigator.pop(context),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50), // Rounded corners for pill shape
-                      ),
-                      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 30), // Spacing inside the button
-                      elevation: 0, // Remove shadow for a flatter look
-                      textStyle: TextStyle(
-                        fontSize: 16, // Font size
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                    child: const Text(
-                      "Cancel",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  )
-
                 ],
               ),
             );
@@ -123,7 +115,26 @@ class LoginController extends GetxController {
     );
   }
 
-  // Option for selecting from camera or gallery
+  Future<void> pickImageFromCamera(BuildContext context) async {
+    final picker = ImagePicker();
+    final XFile? pickedFile = await picker.pickImage(source: ImageSource.camera);
+
+    if (pickedFile != null) {
+      profileImage.value = pickedFile.path;
+      isImagePicked.value = true;
+    }
+  }
+
+  Future<void> pickImageFromGallery(BuildContext context) async {
+    final picker = ImagePicker();
+    final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      profileImage.value = pickedFile.path;
+      isImagePicked.value = true;
+    }
+  }
+
   static Widget buildOption({
     required IconData icon,
     required String label,
@@ -144,11 +155,10 @@ class LoginController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    usernameController.addListener(() => updateCredentials());
-    passwordController.addListener(() => updateCredentials());
+    usernameController.addListener(updateCredentials);
+    passwordController.addListener(updateCredentials);
   }
 
-  // Update login model with credentials
   void updateCredentials() {
     loginModel.value.updateLoginState(
       usernameController.text,
@@ -156,26 +166,46 @@ class LoginController extends GetxController {
     );
   }
 
-  // Validate form login
+  // Update the isValid function to check if username and password are at least 8 characters
   bool isValid() {
-    return loginModel.value.isValid;
+    return usernameController.text.length >= 8 &&
+        passwordController.text.length >= 8 &&
+        loginModel.value.isValid;
   }
 
-  // Handle login action
   void onLoginPressed(BuildContext context) {
     if (isValid()) {
-      Get.to(() => LoginPickImage()); // Navigate to another screen if valid
+      Get.to(() => LoginPickImage());
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Username dan password harus diisi!", style: TextStyle(color: Colors.white)),
-          backgroundColor: Colors.red,
-          behavior: SnackBarBehavior.floating,
-          margin: EdgeInsets.fromLTRB(20, 50, 20, 0),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        ),
+      Get.snackbar(
+        'Error',
+        'Username dan password harus diisi dan minimal 8 karakter!',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.TOP,
+        margin: const EdgeInsets.all(AppSizes.paddingXL),
       );
     }
+  }
+
+  void resetForm() {
+    usernameController.clear();
+    passwordController.clear();
+    isImagePicked.value = false;
+    profileImage.value = '';
+  }
+
+  void onLogoutPressed(BuildContext context) {
+    Get.snackbar(
+      'Anda Berhasil Logout',
+      'Anda telah keluar dari akun Anda.',
+      backgroundColor: Colors.red,
+      colorText: Colors.white,
+      snackPosition: SnackPosition.TOP,
+      margin: const EdgeInsets.all(AppSizes.paddingXL),
+    );
+    resetForm();
+    Get.offAll(() => LoginScreen());
   }
 
   @override

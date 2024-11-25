@@ -12,11 +12,11 @@ class CustomTextPairModel {
     required this.secondaryText,
     this.primaryStyle = const TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: 20,
+      fontSize: 18,
       color: Colors.black,
     ),
     this.secondaryStyle = const TextStyle(
-      fontSize: 16,
+      fontSize: 14,
       color: Colors.black,
     ),
     this.alignment = CrossAxisAlignment.center,

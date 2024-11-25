@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../constants/app_colors.dart';
+import '../constants/app_sizes.dart';
 import '../models/text_field.dart';
 
 class CustomTextFieldWidget extends StatelessWidget {
@@ -19,14 +21,20 @@ class CustomTextFieldWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.blue),
+          borderSide: const BorderSide(color: AppColors.primary),
           borderRadius: BorderRadius.circular(20),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.blue),
+          borderSide: const BorderSide(color: AppColors.primary),
           borderRadius: BorderRadius.circular(20),
         ),
-        contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+        contentPadding: EdgeInsets.symmetric(
+          vertical: AppSizes.paddingL, // Menambah padding vertikal
+          horizontal: AppSizes.paddingL // Menambah padding horizontal
+        ),
+      ),
+      style: TextStyle(
+        fontSize: AppSizes.spaceM, // Misalnya, ukuran font menengah
       ),
     );
   }

@@ -4,7 +4,8 @@ import 'package:talentaku/constants/app_colors.dart';
 import '../../constants/app_sizes.dart';
 import '../../controllers/login_controller.dart';
 import '../../widgets/custom_text_pair.dart';
-import '../../widgets/custom_text_field.dart'; // Import custom text field
+import '../../widgets/custom_text_field.dart';
+import '../../widgets/login_button.dart'; // Import custom text field
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -23,8 +24,8 @@ class LoginScreen extends StatelessWidget {
               children: [
                 Image.asset("images/logo.png"),
                 Container(
-                  padding: EdgeInsets.all(20),
-                  margin: EdgeInsets.all(30),
+                  padding: EdgeInsets.all(AppSizes.paddingXL),
+                  margin: EdgeInsets.all(AppSizes.paddingXL),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.white,
@@ -33,7 +34,7 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       // CustomTextPairWidget
                       CustomTextPairWidget(
-                        model: controller.getCustomTextPair(),
+                        model: controller.getPair(),
                       ),
 
                       SizedBox(height: AppSizes.spaceXL),
@@ -47,13 +48,12 @@ class LoginScreen extends StatelessWidget {
                       CustomTextFieldWidget(model: controller.getPasswordModel()),
 
                       SizedBox(height: AppSizes.spaceXL),
+
                       // Login button
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
-                        onPressed: () {
-                          controller.onLoginPressed(context);
-                        },
-                        child: Text('Login', style: TextStyle(color: AppColors.textLight)),
+                      ReusableButton(
+                        buttonText: 'Login',
+                        icon: Icons.arrow_forward_ios_rounded,
+                        onPressed: () => controller.onLoginPressed(context), // Logika login di controller
                       ),
                     ],
                   ),
