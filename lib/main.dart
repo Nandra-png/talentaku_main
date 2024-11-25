@@ -31,8 +31,7 @@ class MainApp extends StatelessWidget {
         '/home': (context) => const HomeScreen(),
       },
       initialBinding: BindingsBuilder(() {
-        Get.put(
-            NavigationController());
+        Get.put(NavigationController());
       }),
     );
   }
@@ -51,8 +50,8 @@ class MainScreen extends GetView<NavigationController> {
           children: [
             HomeScreen(),
             LaporanSiswaScreen(),
-            KelasScreen(),
             ProfileScreen(),
+            KelasScreen(),
           ],
         ),
       ),

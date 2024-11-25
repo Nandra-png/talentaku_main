@@ -56,20 +56,17 @@ class ProfileScreen extends StatelessWidget {
                       boxStyle: BoxStyle.border,
                     ),
                   ),
-
                   const SizedBox(width: AppSizes.spaceS),
-
                   Container(
                     width: AppSizes.profile,
                     child: TextPairWidget(
                       icon: Icons.list_alt,
-                      model: profileController.getTextPair('NIS'),
+                      model: profileController.getTextPair('Kelompok'),
                       boxStyle: BoxStyle.border,
                     ),
                   ),
                 ],
               ),
-
 
               const SizedBox(height: AppSizes.spaceM),
 
@@ -81,12 +78,11 @@ class ProfileScreen extends StatelessWidget {
                       model: profileController.getTextPair('Nama Lengkap'),
                     ),
                     const SizedBox(height: AppSizes.spaceS),
-
                     TextPairWidget(
-                      model: profileController.getTextPair('Tempat, Tanggal Lahir'),
+                      model: profileController
+                          .getTextPair('Tempat, Tanggal Lahir'),
                     ),
                     const SizedBox(height: AppSizes.spaceS),
-
                     TextPairWidget(
                       model: profileController.getTextPair('Alamat'),
                     ),

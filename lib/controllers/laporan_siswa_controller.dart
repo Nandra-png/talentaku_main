@@ -15,17 +15,17 @@ class LaporanSiswaController extends GetxController {
     'Pilih Tanggal',
   ];
 
-  // Dummy data laporan dengan tanggal yang berbeda
-  final List<LaporanPreviewEvent> allLaporan = [
+  // Dummy data laporan
+  final List<LaporanPreviewEvent> allLaporan = [  
     LaporanPreviewEvent(
       title: 'Laporan Harian - Rabu',
-      date: '14 Maret 2024',
+      date: '24 November 2024',
       description:
           'Perkembangan motorik halus semakin membaik. Siswa dapat mengikuti instruksi dengan baik dan menyelesaikan kegiatan tepat waktu. Hari ini fokus pada kegiatan menulis dan menggambar.',
     ),
     LaporanPreviewEvent(
       title: 'Laporan Harian - Selasa',
-      date: '17 November 2024',
+      date: '20 November 2024',
       description:
           'Siswa mengikuti kegiatan belajar dengan antusias. Mampu berinteraksi dengan teman-teman dan menunjukkan sikap yang positif dalam aktivitas kelompok.',
     ),

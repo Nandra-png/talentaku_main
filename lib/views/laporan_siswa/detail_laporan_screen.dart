@@ -22,7 +22,6 @@ class DetailLaporanScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Header dengan tinggi yang lebih kecil
               Container(
                 height: AppSizes.detailHeaderHeight,
                 width: double.infinity,
@@ -48,10 +47,10 @@ class DetailLaporanScreen extends StatelessWidget {
                             ),
                             onPressed: () => Get.back(),
                           ),
-                          SizedBox(width: AppSizes.spaceM),
+                          // SizedBox(width: AppSizes.spaceS),
                           Text(
                             'Laporan Harian',
-                            style: AppTextStyles.heading2.copyWith(
+                            style: AppTextStyles.heading1.copyWith(
                               color: AppColors.textLight,
                             ),
                           ),

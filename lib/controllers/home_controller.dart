@@ -6,7 +6,7 @@ import 'package:talentaku/models/laporan_preview_event.dart';
 import 'package:talentaku/controllers/laporan_siswa_controller.dart';
 
 class HomeController extends GetxController {
-  String userName = 'Narendra';
+  String userName = 'Khalisa';
   late LaporanSiswaController laporanController;
 
   List<Event> events = [

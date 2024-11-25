@@ -33,7 +33,7 @@ class ProfileController extends GetxController {
         break;
       case 'Kelompok':
         secondaryText = user.value.group;
-        icon = Icons.group;  // Add an icon for Kelompok
+        icon = Icons.group; 
         break;
       default:
         secondaryText = '';
