@@ -3,19 +3,14 @@ import 'package:get/get.dart';
 import 'package:talentaku/constants/app_colors.dart';
 import 'package:talentaku/constants/app_text_styles.dart';
 import 'package:talentaku/constants/app_sizes.dart';
+import 'package:talentaku/models/info_popup_event.dart';
 
 class InfoPopup extends StatelessWidget {
-  final String title;
-  final String message;
-  final IconData icon;
-  final Color? iconColor;
+  final InfoPopupEvent popupEvent;
 
   const InfoPopup({
     Key? key,
-    required this.title,
-    required this.message,
-    this.icon = Icons.info_outline,
-    this.iconColor,
+    required this.popupEvent,
   }) : super(key: key);
 
   static void show({
@@ -26,10 +21,12 @@ class InfoPopup extends StatelessWidget {
   }) {
     Get.dialog(
       InfoPopup(
-        title: title,
-        message: message,
-        icon: icon,
-        iconColor: iconColor,
+        popupEvent: InfoPopupEvent(
+          title: title,
+          message: message,
+          icon: icon,
+          iconColor: iconColor,
+        ),
       ),
     );
   }
@@ -46,19 +43,19 @@ class InfoPopup extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
-              icon,
+              popupEvent.icon,
               size: AppSizes.iconL * 2,
-              color: iconColor ?? AppColors.primary,
+              color: popupEvent.iconColor ?? AppColors.primary,
             ),
             SizedBox(height: AppSizes.spaceM),
             Text(
-              title,
+              popupEvent.title,
               style: AppTextStyles.heading3,
               textAlign: TextAlign.center,
             ),
             SizedBox(height: AppSizes.spaceS),
             Text(
-              message,
+              popupEvent.message,
               style: AppTextStyles.bodyMedium.copyWith(
                 color: AppColors.textPrimary.withOpacity(0.7),
               ),

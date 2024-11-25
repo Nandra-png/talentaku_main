@@ -57,4 +57,15 @@ class AppSizes {
   static const double bottomSheetIndicatorWidth = 44.0;
   static const double bottomSheetIndicatorHeight = 4.0;
   static const double bottomSheetButtonHeight = 59.0;
+
+  // Detail Laporan Screen
+  static const double detailHeaderHeight = 150.0;
+  static const double detailHeaderRadius = 50.0;
+  static const double detailCardHeight = 80.0;
+  static const double detailIconSize = 40.0;
+  static const double detailContentPadding = 20.0;
+
+  // Tag Container
+  static const double tagHeight = 32.0;
+  static const double tagSpacing = 8.0;
 }

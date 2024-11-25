@@ -28,7 +28,6 @@ class LaporanSiswaScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: AppSizes.paddingXL),
               child: Theme(
                 data: Theme.of(context).copyWith(
-                  // Kustomisasi popup menu
                   popupMenuTheme: PopupMenuThemeData(
                     color: AppColors.cardBackground,
                     shape: RoundedRectangleBorder(
@@ -49,78 +48,34 @@ class LaporanSiswaScreen extends StatelessWidget {
                     ],
                   ),
                   child: Obx(() => DropdownButtonFormField<String>(
-                    value: controller.selectedFilter.value,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: AppSizes.paddingL,
-                        vertical: AppSizes.paddingM,
-                      ),
-                      // Menambahkan icon filter
-                      prefixIcon: Icon(
-                        Icons.filter_list,
-                        color: AppColors.primary,
-                      ),
-                    ),
-                    icon: Icon(
-                      Icons.keyboard_arrow_down,
-                      color: AppColors.primary,
-                    ),
-                    style: AppTextStyles.bodyMedium,
-                    dropdownColor: AppColors.cardBackground,
-                    // Kustomisasi item dropdown
-                    selectedItemBuilder: (context) {
-                      return controller.filterOptions.map((String value) {
-                        return Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            value,
-                            style: AppTextStyles.bodyMedium.copyWith(
-                              color: AppColors.textPrimary,
-                            ),
+                        value: controller.selectedFilter.value,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: AppSizes.paddingL,
+                            vertical: AppSizes.paddingM,
                           ),
-                        );
-                      }).toList();
-                    },
-                    items: controller.filterOptions.map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(AppSizes.radiusM),
-                          ),
-                          child: Row(
-                            children: [
-                              // Icon untuk setiap opsi
-                              Icon(
-                                value == 'Semua Laporan'
-                                    ? Icons.list_alt
-                                    : value == '7 Hari Terakhir'
-                                        ? Icons.date_range
-                                        : Icons.calendar_today,
-                                color: AppColors.primary,
-                                size: AppSizes.iconM,
-                              ),
-                              SizedBox(width: AppSizes.paddingM),
-                              Text(
-                                value,
-                                style: AppTextStyles.bodyMedium.copyWith(
-                                  color: AppColors.textPrimary,
-                                ),
-                              ),
-                            ],
+                          prefixIcon: Icon(
+                            Icons.filter_list,
+                            color: AppColors.primary,
                           ),
                         ),
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      if (value != null) controller.filterLaporan(value);
-                    },
-                    // Menambahkan animasi saat dropdown dibuka/ditutup
-                    menuMaxHeight: 300,
-                    elevation: 8,
-                    isExpanded: true,
-                  )),
+                        icon: Icon(
+                          Icons.keyboard_arrow_down,
+                          color: AppColors.primary,
+                        ),
+                        style: AppTextStyles.bodyMedium,
+                        dropdownColor: AppColors.cardBackground,
+                        items: controller.filterOptions.map((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          if (value != null) controller.filterLaporan(value);
+                        },
+                      )),
                 ),
               ),
             ),
@@ -156,6 +111,7 @@ class LaporanSiswaScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return LaporanSiswaCard(
                       laporan: controller.filteredLaporan[index],
+                      index: index,
                     );
                   },
                 );
