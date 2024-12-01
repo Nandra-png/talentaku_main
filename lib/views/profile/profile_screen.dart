@@ -48,6 +48,7 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: TextPairWidget(
+                      icon: Icons.book,
                       model: profileController.getTextPair('NIS'),
                       boxStyle: BoxStyle.border,
                     ),
@@ -90,15 +91,15 @@ class ProfileScreen extends StatelessWidget {
 
             // Logout Button
             SizedBox(
-              width: 150,
+              width: AppSizes.profileCardWidth,
               child: ReusableButton(
                 buttonText: "Logout",
                 icon: Icons.logout,
                 onPressed: () {
                   loginController.onLogoutPressed(context);
                 },
-                backgroundColor: Colors.red,
-                textColor: Colors.white,
+                backgroundColor: AppColors.error,
+                textColor: AppColors.textLight,
               ),
             ),
           ],

@@ -47,7 +47,7 @@ class TextPairWidget extends StatelessWidget {
       child: Row(
         children: [
           if (icon != null) ...[
-            Icon(icon, size: AppSizes.iconM, color: AppColors.primary),
+            Icon(icon, size: AppSizes.iconXL, color: AppColors.primary),
             SizedBox(width: AppSizes.spaceS),
           ],
           Expanded(
